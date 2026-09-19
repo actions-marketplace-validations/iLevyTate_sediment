@@ -127,6 +127,14 @@ limit. It asks `/rate_limit` first, that endpoint being free, then splits the bu
 pages and anchors. Where a repository does not fit, it fetches fewer commits and tells you, instead
 of failing halfway through.
 
+Renames are the third compromise, and the page only hints at it. Locally, `git log -M` reports a
+move as a move, so the file keeps its birth date and its history. Diffing trees has no such notion.
+A file sitting at one path in one anchor and another path in the next reads as a deletion plus an
+addition, which means a refactor that only shuffled files shows up as churn that never happened.
+The CLI carries the old name through as `renamedFrom` on the file record and on the event row. The
+browser build cannot see it at all, and the note under the masthead says no more than that events
+came from diffing snapshots.
+
 Run the CLI when you want the exact numbers.
 
 ## Lanes
